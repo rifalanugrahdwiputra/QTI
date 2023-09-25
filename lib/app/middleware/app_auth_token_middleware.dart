@@ -20,6 +20,7 @@ class AppAuthTokenMiddleware {
 
     Map<String, dynamic> headerHttpRequest = {
       'Authorization': 'Bearer ${box.read(LocalStorage.tokenJWT)}',
+      'cache-control': 'no-cache',
     };
 
     return headerHttpRequest;

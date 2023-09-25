@@ -88,7 +88,7 @@ class _AddAssetViewState extends State<AddAssetView> {
                     const SizedBox(height: 8.0),
                     TextFormField(
                       controller: controller.nameAssetController,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       validator: controller.validateAssetName,
                       style: const TextStyle(
                         fontSize: 14.0,
@@ -151,7 +151,7 @@ class _AddAssetViewState extends State<AddAssetView> {
                         });
                       },
                       controller: controller.nameStatusController,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       validator: controller.validateStatus,
                       readOnly: true,
                       style: const TextStyle(
@@ -291,7 +291,7 @@ class _AddAssetViewState extends State<AddAssetView> {
                         });
                       },
                       controller: controller.nameLocationController,
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       readOnly: true,
                       validator: controller.validateLocation,
                       style: const TextStyle(
