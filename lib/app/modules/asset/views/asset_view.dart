@@ -28,6 +28,7 @@ class _AssetViewPageState extends State<AssetViewPage> {
   AssetController controller = AssetController();
   HomeController homeController = HomeController();
   int page = 1;
+  final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -152,6 +153,11 @@ class _AssetViewPageState extends State<AssetViewPage> {
       body: SafeArea(
         child: Obx(
           () {
+            final filteredAssets = controller.assetData
+                .where((asset) => asset.name
+                    .toLowerCase()
+                    .contains(searchController.text.toLowerCase()))
+                .toList();
             return RefreshIndicator(
               onRefresh: () async {
                 await Future.delayed(const Duration(milliseconds: 800));
@@ -171,14 +177,11 @@ class _AssetViewPageState extends State<AssetViewPage> {
                   ),
                   const SizedBox(height: 12.0),
                   TextFormField(
-                    onTap: () {
-                      setState(() {
-                        // location.toggle();
-                      });
+                    controller: searchController,
+                    onChanged: (value) {
+                      setState(() {});
                     },
-                    // controller: controller.nameAssetController,
-                    keyboardType: TextInputType.emailAddress,
-                    // validator: controller.validateAssetName,
+                    keyboardType: TextInputType.text,
                     style: const TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
@@ -246,7 +249,7 @@ class _AssetViewPageState extends State<AssetViewPage> {
                           child: ListView.builder(
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
-                            itemCount: controller.assetData.length,
+                            itemCount: filteredAssets.length,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12.0,
                               vertical: 10.0,
@@ -279,7 +282,7 @@ class _AssetViewPageState extends State<AssetViewPage> {
                                             ),
                                             const SizedBox(height: 2.0),
                                             Text(
-                                              controller.assetData[index].name,
+                                              filteredAssets[index].name,
                                               style: const TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600,
@@ -307,8 +310,7 @@ class _AssetViewPageState extends State<AssetViewPage> {
                                             onPressed: () {
                                               Get.to(
                                                 EditAssetView(
-                                                  id: controller
-                                                      .assetData[index].id,
+                                                  id: filteredAssets[index].id,
                                                 ),
                                               );
                                             },
