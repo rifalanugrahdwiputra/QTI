@@ -25,21 +25,21 @@ class QTIApps extends StatefulWidget {
 class _QTIAppsState extends State<QTIApps> {
   @override
   Widget build(BuildContext context) {
-    // return FutureBuilder(
-    //   future: Future.delayed(const Duration(seconds: 1)),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppConfig.appName,
-      getPages: AppPages.routes,
-      initialRoute: AppPages.initial,
-      themeMode: ThemeMode.system,
-      defaultTransition: Transition.cupertino,
+    return FutureBuilder(
+      future: Future.delayed(const Duration(seconds: 1)),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: AppConfig.appName,
+            getPages: AppPages.routes,
+            initialRoute: AppPages.initial,
+            themeMode: ThemeMode.system,
+            defaultTransition: Transition.cupertino,
+          );
+        }
+        return const SplashScreen();
+      },
     );
-    //   }
-    //   return const SplashScreen();
-    // },
-    // );
   }
 }
